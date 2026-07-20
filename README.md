@@ -1,50 +1,56 @@
-# Welcome to your Expo app 👋
+# Weather App with Saved Cities (React Native + Expo)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A React Native rebuild of my [Kotlin/Jetpack Compose weather app](https://github.com/Ahmed-Fatah1192/weather-app-compose) — same concept, same features, deliberately re-implemented in a second stack to practice both platforms side by side.
 
-## Get started
+Users log in, save cities they care about, and check live current weather for each one.
 
-1. Install dependencies
+## Features
 
-   ```bash
-   npm install
-   ```
+- **Local login screen** — simple local/mock authentication (not a real backend auth system)
+- **Live weather data** — fetches current temperature, conditions, and humidity from the OpenWeatherMap API
+- **Saved cities with full CRUD** — add a city, view the saved list, tap in for live weather detail, edit a city's name (with the edit genuinely correcting the stored data, not just a cosmetic label), and remove a city
+- **Local persistence** — saved cities stored with AsyncStorage, surviving app restarts
+- **File-based navigation** — built with Expo Router; each screen is a file under `app/`
+- **Proper loading/error states** — a misspelled or invalid city name shows a clear error message instead of crashing or failing silently
 
-2. Start the app
+## Tech Stack
 
-   ```bash
-   npx expo start
-   ```
+- **React Native** + **Expo** (Expo Router for navigation)
+- **TypeScript**
+- **AsyncStorage** — local key-value persistence
+- **React Context + hooks** (`useState`, `useEffect`, `useContext`) — state management
+- Native `fetch` for networking (no extra HTTP library needed)
 
-In the output, you'll find options to open the app in a
+## What I practiced building this
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- Comparing the same app architecture across two different mobile stacks: Repository/ViewModel (Kotlin) vs. Context + hooks (React Native)
+- React Native/Expo's file-based routing (Expo Router) versus manually configuring a navigation graph
+- TypeScript fundamentals — interfaces, generics, nullable types — as a superset of the JavaScript I originally learned
+- Handling async data fetching and proper loading/error states, not just the happy path
+- Keeping an API key out of version control using Expo's `EXPO_PUBLIC_` environment variable convention
+- Debugging a real bug where an "Update" (rename) operation only changed a cosmetic label instead of the actual underlying data — and fixing it properly
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## Getting Started
 
-## Get a fresh project
-
-When you're ready, run:
+Clone the repo:
 
 ```bash
-npm run reset-project
+git clone https://github.com/Ahmed-Fatah1192/weather-app-react-native.git
+cd weather-app-react-native
+npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+You'll need your own free OpenWeatherMap API key (openweathermap.org) — create a `.env` file in the project root:
+```
+EXPO_PUBLIC_WEATHER_API_KEY=your_key_here
+```
 
-## Learn more
+Then run:
+```bash
+npx expo start
+```
+Scan the QR code with the Expo Go app on your phone.
 
-To learn more about developing your project with Expo, look at the following resources:
+## Screenshots
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+*(add a screenshot or short gif of the app here)*
